@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { deckFormSchema, type DeckFormValues } from "@/lib/schemas";
 import { Button } from "@/components/ui/button";
 
@@ -45,7 +46,11 @@ export function DeckForm({ onSuccess }: DeckFormProps) {
 
   const [createDeck, { loading }] = useMutation(CREATE_DECK, {
     onCompleted: () => {
-      onSuccess?.() || router.push("/decks");
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push("/decks");
+      }
     },
     onError: (error) => {
       form.setError("root", { message: error.message });
@@ -72,9 +77,8 @@ export function DeckForm({ onSuccess }: DeckFormProps) {
             <FormItem>
               <FormLabel>Deck name</FormLabel>
               <FormControl>
-                <input
+                <Input
                   {...field}
-                  className="w-full p-2 rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
                   placeholder="Enter deck name"
                 />
               </FormControl>
