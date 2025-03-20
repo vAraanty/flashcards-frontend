@@ -20,7 +20,7 @@ export default function Card({
       className={`aspect-[3/2] w-full cursor-pointer ${className}`}
       onClick={onClick}
     >
-      <div className={`w-full h-full bg-gradient-to-br from-[#1a1f2e] to-[#0f1219] rounded-xl 
+      <div className={`w-full h-full bg-[#0a0a0a] rounded-xl 
         shadow-lg p-6 flex flex-col items-center justify-center relative overflow-hidden
         border border-gray-800 hover:border-${hoverColor}-500/50 group`}>
         

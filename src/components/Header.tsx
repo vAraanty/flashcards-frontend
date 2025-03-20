@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -9,8 +10,8 @@ export default function Header() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="bg-[#1a1f2e] border-b border-gray-800">
-      <div className="container mx-auto px-4">
+    <header className="bg-background border-b border-border">
+      <div className="container mx-auto max-w-7xl px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-blue-500">
@@ -29,6 +30,7 @@ export default function Header() {
             >
               Home
             </Link>
+
             <Link 
               href="/decks" 
               className={`text-sm font-medium transition-colors duration-200 ${
@@ -39,6 +41,7 @@ export default function Header() {
             >
               Decks
             </Link>
+
             <Link 
               href="/about" 
               className={`text-sm font-medium transition-colors duration-200 ${
@@ -49,6 +52,8 @@ export default function Header() {
             >
               About
             </Link>
+
+            <ModeToggle />
           </nav>
         </div>
       </div>

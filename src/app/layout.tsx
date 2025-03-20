@@ -1,6 +1,7 @@
 import { ApolloWrapper } from "@/lib/ApolloWrapper";
 import Header from "@/components/Header";
 import './globals.css'
+import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
   children,
@@ -8,15 +9,22 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-[#0f1219]">
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-background">
         <ApolloWrapper>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow container mx-auto px-4 py-8">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow container max-w-7xl mx-auto px-4 py-8">
               {children}
-            </main>
-          </div>
+              </main>
+            </div>
+          </ThemeProvider>
         </ApolloWrapper>
       </body>
     </html>
