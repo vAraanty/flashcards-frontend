@@ -13,7 +13,7 @@ const query = gql`
   }
 `;
 
-export default async function Home() {
+export default async function Page() {
   const { data } = await getClient().query({ query });
 
   return (

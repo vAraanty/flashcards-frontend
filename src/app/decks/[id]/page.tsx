@@ -17,15 +17,16 @@ const query = gql`
   }
 `;
 
-export default async function Home({ params }: { params: { id: string } }) {
-  const { data } = await getClient().query({ query, variables: { id: params.id } });
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const { data } = await getClient().query({ query, variables: { id } });
 
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-between items-center w-full mb-8">
         <h1 className="text-4xl font-bold">{data.deck.name}</h1>
         <Button asChild size="default">
-          <Link href={`/decks/${params.id}/flashcards/new`}>Add flashcard</Link>
+          <Link href={`/decks/${id}/flashcards/new`}>Add flashcard</Link>
         </Button>
       </div>
 
@@ -34,7 +35,7 @@ export default async function Home({ params }: { params: { id: string } }) {
           <h2 className="text-2xl font-semibold mb-2">No flashcards yet</h2>
           <p className="mb-4">Start by adding your first flashcard to this deck!</p>
           <Button asChild>
-            <Link href={`/decks/${params.id}/flashcards/new`}>Create your first flashcard</Link>
+            <Link href={`/decks/${id}/flashcards/new`}>Create your first flashcard</Link>
           </Button>
         </div>
       ) : (

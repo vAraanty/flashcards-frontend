@@ -9,8 +9,12 @@ import {
 } from "@apollo/experimental-nextjs-app-support";
 
 function makeClient() {
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT) {
+    throw new Error("NEXT_PUBLIC_GRAPHQL_ENDPOINT must be defined");
+  }
+
   const httpLink = new HttpLink({
-    uri: "http://localhost:3000/graphql",
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
     fetchOptions: { cache: "no-store" },
   });
 
